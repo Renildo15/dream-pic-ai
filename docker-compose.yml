@@ -1,0 +1,26 @@
+name: dreampicai
+
+networks:
+  database: {}
+
+volumes:
+  postgres: {}
+  postgres_test: {}
+  reports: {}
+
+services:
+  postgres-test:
+    image: postgres:16
+    ports:
+      - 5433:5432
+
+    networks:
+      - database
+
+    restart: always
+    environment:
+      - POSTGRES_DB=dreampicai_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_test:/var/lib/postgresql/data
